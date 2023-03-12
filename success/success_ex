@@ -4,3 +4,11 @@ do_op
 ft_putstr
 ft_strdup
 lcm
+ulstr
+inter
+repeat_alpha
+ft_strdup
+rev_print
+alpha_mirror
+lcm
+sort_list

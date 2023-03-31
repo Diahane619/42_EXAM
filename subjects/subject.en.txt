@@ -1,27 +1,20 @@
-Assignment name  : rstr_capitalizer
-Expected files   : rstr_capitalizer.c
+Assignment name  : print_hex
+Expected files   : print_hex.c
 Allowed functions: write
 --------------------------------------------------------------------------------
 
-Write a program that takes one or more strings and, for each argument, puts 
-the last character that is a letter of each word in uppercase and the rest
-in lowercase, then displays the result followed by a \n.
+Write a program that takes a positive (or zero) number expressed in base 10,
+and displays it in base 16 (lowercase letters) followed by a newline.
 
-A word is a section of string delimited by spaces/tabs or the start/end of the
-string. If a word has a single letter, it must be capitalized.
-
-A letter is a character in the set [a-zA-Z]
-
-If there are no parameters, display \n.
+If the number of parameters is not 1, the program displays a newline.
 
 Examples:
 
-$> ./rstr_capitalizer | cat -e
+$> ./print_hex "10" | cat -e
+a$
+$> ./print_hex "255" | cat -e
+ff$
+$> ./print_hex "5156454" | cat -e
+4eae66$
+$> ./print_hex | cat -e
 $
-$> ./rstr_capitalizer "a FiRSt LiTTlE TESt" | cat -e
-A firsT littlE tesT$
-$> ./rstr_capitalizer "SecONd teST A LITtle BiT   Moar comPLEX" "   But... This iS not THAT COMPLEX" "     Okay, this is the last 1239809147801 but not    the least    t" | cat -e
-seconD tesT A littlE biT   moaR compleX$
-   but... thiS iS noT thaT compleX$
-     okay, thiS iS thE lasT 1239809147801 buT noT    thE leasT    T$
-$>

@@ -15,3 +15,6 @@ sort_list
 ft_putstr
 ft_putstr
 inter
+rot_13
+fizzbuzz
+ft_atoi

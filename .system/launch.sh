@@ -119,6 +119,10 @@ if [ ! -f .system/readline_ok ]; then
     printf "$LINE_UP$CLEAR_LINE$GREEN$BOLD"
     # echo -ne "✔$RESET Readline installation using apt-get$WHITE$BOLD\n\n"
 
+    # check if the compilator c++ is installed
+
+
+
     # clear
     g++ .system/checkreadline.cpp -o .system/readline_ok 2>.system/.devmake.err
     # if there is no .system/readline_ok file, it means that the readline library is not installed
@@ -130,8 +134,18 @@ if [ ! -f .system/readline_ok ]; then
         sleep 1
         sudo yum install readline
         clear
+
+
+        g++ .system/checkreadline.cpp -o .system/readline_ok 2>.system/.devmake.err
+
+
+
+
+
         if [ ! -f .system/readline_ok ]; then
             echo -ne "Can't install readline library... $WHITE$BOLD"
+            echo -ne "1. Check if g++ is installed\n"
+            echo -ne "2. Check if libreadline-dev is installed\n"
             echo -e "Please install it manually or write an Issue on Github..."
             exit 1
         fi
@@ -186,11 +200,64 @@ while [ ! -f .system/a.out ]; do
     done
 done
 
+check_package() {
+    if ! command -v "$1" &>/dev/null; then
+        return 1
+    fi
+}
+
+# Vérification de clang
+if ! check_package "clang"; then
+    echo "Le compilateur clang n'est pas installé sur votre système."
+    echo "Veuillez l'installer pour continuer."
+    exit 1
+fi
+
+# Vérification de clang++
+if ! check_package "clang++"; then
+    echo "Le compilateur clang++ n'est pas installé sur votre système."
+    echo "Veuillez l'installer pour continuer."
+    exit 1
+fi
+
+# Vérification de gcc
+if ! check_package "gcc"; then
+    echo "Le compilateur gcc n'est pas installé sur votre système."
+    echo "Veuillez l'installer pour continuer."
+    exit 1
+fi
+
+# Vérification de g++
+if ! check_package "g++"; then
+    echo "Le compilateur g++ n'est pas installé sur votre système."
+    echo "Veuillez l'installer pour continuer."
+    exit 1
+fi
+
 printf "$LINE_UP$CLEAR_LINE$GREEN$BOLD"
 echo -ne "✔$RESET Compilation of$BOLD$MANGENTA 42_EXAM $RESET\n"
 
 # echo "Done!"
 chmod +x .system/a.out
 # sleep 1
+
+
+
+# check if USER is set, if not, set it
+if [ -z "$USER" ]; then
+    #if there is a .system/.env file, read it and set the variable USER
+    if [ -f .system/.env ]; then
+        export USER=$(cat .system/.env)
+        echo "Variable USER set to $USER ✅"
+        ./.system/a.out
+        exit 0
+    fi
+    echo "USER is not set, you must enter your 42 login to use this program "
+    echo -ne "Enter your 42 login : "
+    read -r user_login        # Lire le login entré par l'utilisateur
+    export USER="$user_login" # Créer la variable d'environnement USER
+    echo "USER=$user_login" >.system/.env
+    echo "Variable USER set to $USER ✅"
+fi
 
 ./.system/a.out

@@ -3,41 +3,29 @@
 #                                                         :::      ::::::::    #
 #    tester.sh                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
+#    By: tstrassb <tstrassb@student.42>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/06/20 02:26:11 by jcluzet           #+#    #+#              #
-#    Updated: 2023/03/06 22:05:54 by nnuno-ca         ###   ########.fr        #
+#    Created: 2023/03/16 12:29:24 by tstrassb          #+#    #+#              #
+#    Updated: 2023/03/16 12:34:10 by tstrassb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILE='snake_to_camel.c'
-ASSIGN='snake_to_camel'
+FILE='print_bits.c'
+ASSIGN='print_bits'
 
-bash .system/auto_correc_program.sh $FILE $ASSIGN 
+bash .system/auto_correc_main.sh $FILE $ASSIGN "2"
 if [ -e .system/grading/traceback ];then
     mv .system/grading/traceback .
 	exit 1
 fi
 
-bash .system/auto_correc_program.sh $FILE $ASSIGN ""
+bash .system/auto_correc_main.sh $FILE $ASSIGN "5"
 if [ -e .system/grading/traceback ];then
     mv .system/grading/traceback .
 	exit 1
 fi
 
-bash .system/auto_correc_program.sh $FILE $ASSIGN "here_is_a_snake_case_string"
-if [ -e .system/grading/traceback ];then
-    mv .system/grading/traceback .
-	exit 1
-fi
-
-bash .system/auto_correc_program.sh $FILE $ASSIGN "hello_world"
-if [ -e .system/grading/traceback ];then
-    mv .system/grading/traceback .
-	exit 1
-fi
-
-bash .system/auto_correc_program.sh $FILE $ASSIGN "test_with" "multiple_arguments" "aAa"
+bash .system/auto_correc_main.sh $FILE $ASSIGN "42"
 if [ -e .system/grading/traceback ];then
     mv .system/grading/traceback .
 	exit 1
